@@ -1,0 +1,25 @@
+---
+- name: Wireguard Debconf Configuration
+  # Before installing any package, this only sets the preference for the question
+  debconf:
+    name='wireshark-common'
+    question='wireshark-common/install-setuid'
+    vtype='boolean'
+    value={{wireshark_as_nonsudo | string }}
+  become: true
+  notify: 
+    - wireshark_get_user
+    - wireshark_as_nonsudo
+
+- name: Update global packages and upgrade
+  apt:
+    update_cache: true
+    upgrade: "yes"
+  become: true
+
+- name: Install global packages with apt.
+  apt:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ apt_security_tools }}"
+  become: true
