@@ -8,7 +8,6 @@
     value={{wireshark_as_nonsudo | string }}
   become: true
   notify: 
-    - wireshark_get_user
     - wireshark_as_nonsudo
 
 - name: Update global packages and upgrade

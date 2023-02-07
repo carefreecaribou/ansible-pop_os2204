@@ -7,7 +7,7 @@
 
 - name: Add current user to wireshark group.
   user:
-    name: "{{ host_user }}"
+    name: "{{ ansible_ssh_user }}"
     append: true
     groups: wireshark
   become: true

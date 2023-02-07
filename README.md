@@ -32,6 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "/home/user/playbook/main.yml"
+    # ansible.verbose = "vv"
   end
 end
 ```
