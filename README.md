@@ -5,9 +5,9 @@ This is my personal playbook for Pop_OS! 22.04 LTS. It is designed to be ran loc
 On a newly installed image:
 - Connect to a wireless network.
 - To overwrite the defaults, save a confiration file as ~/provision-config.yml.
-- Open a terminal, curl the `autoprovision.sh` script and pipe to bash to autoprovision the system:
+- Open a terminal, curl the `.autoprovision.sh` script and pipe to bash to autoprovision the system:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/carefreecaribou/ansible-pop_os/master/.autoprovision.sh | bash
+curl -fsSL https://raw.githubusercontent.com/carefreecaribou/ansible-pop_os2204/main/.autoprovision.sh | bash
 
 ```
 
