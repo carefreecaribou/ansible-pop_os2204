@@ -52,10 +52,10 @@
   become: true
 
 # Make Caffeine Indicator Start on boot
-- name: Ensure caffeine is set to autostart.
+- name: Ensure caffeine-indicator is set to autostart.
   copy: 
-    src: caffeine.desktop
-    dest: /etc/xdg/autostart/caffeine.desktop
+    src: caffeine-indicator.desktop
+    dest: /etc/xdg/autostart/caffeine-indicator.desktop
     owner: root
     group: root
     mode: '0644'

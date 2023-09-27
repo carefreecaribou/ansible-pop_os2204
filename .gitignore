@@ -4,3 +4,5 @@
 roles*
 config.yml
 Vagrantfile
+test.sh
+.vscode/
