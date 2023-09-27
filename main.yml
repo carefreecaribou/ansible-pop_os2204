@@ -1,0 +1,49 @@
+---
+- hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ['always']
+
+  # Community Roles from Ansible Galaxy
+  # Roles:
+  #   - role: role_here
+
+  # handlers:
+  #   - name: wireshark_as_nonsudo
+  #     include: handlers/wireshark-as-nonsudo.yml
+
+  tasks:
+    - import_tasks: tasks/remove-autoprovision-autostart.yml
+      when: remove_autostart
+      tags: ['remove_autostart']
+
+    - import_tasks: tasks/sudoers.yml
+      when: configure_sudoers
+      tags: ['sudoers']
+
+    - import_tasks: tasks/configure-system-customizations.yml
+      when: configure_system_customizations
+      tags: ['configure_system_customizations']
+
+    - import_tasks: tasks/security-tools.yml
+      when: configure_infosec_tools
+      tags: ['infosec-tools']
+    
+    - import_tasks: tasks/remove-config.yml
+      when: remove_config
+      tags: ['remove_config']    
+
+    # - block:
+    #     - name: Run configured post-provision ansible task files.
+    #       include_tasks: "{{ outer_item }}"
+    #       loop_control:
+    #         loop_var: outer_item
+    #       with_fileglob: "{{ post_provision_tasks|default(omit) }}"
+    #   tags: ['post']

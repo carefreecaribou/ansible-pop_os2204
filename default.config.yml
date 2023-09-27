@@ -1,0 +1,47 @@
+---
+downloads: ~/.ansible-downloads/
+profile_command: 'gnome-terminal -- bash -c "cd ~/Development/ansible-pop_os2204 && ansible-playbook main.yml --ask-become-pass; bash"'
+# Roles
+configure_docker: true
+
+# Tasks
+remove_autostart: false
+configure_sudoers: true
+sudoers_custom_config: |
+  # Allow {{ ansible_user_id }} to use sudo with no password.
+  {{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL
+
+dotfiles_repo: https://github.com/carefreecaribou/dotfiles.git
+dotfiles_repo_accept_hostkey: true
+dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
+dotfiles_files:
+  - .bashrc
+  - .gitignore
+  - .profile
+  - .vimrc
+
+configure_system_customizations: true # This should always be true to setup the system correctly.
+banner_message: 'Unauthorized Access Prohibited'
+devices_to_disable: 'bluetooth' # 'bluetooth nfc wifi wwan'
+customization_packages: # Optional Packages to Install
+  - name: tlp
+    state: present # present/absent/latest, default: present
+  - name: gnupg2              # GPG Package
+    state: present
+  - name: scdaemon          # For Allowing use of Yubikey Signing
+    state: present
+  - name: pcscd             # For Allowing use of Yubikey Signing
+    state: present
+  - name: libpcsclite-dev   # For Allowing use of Yubikey Signing
+    state: present
+configure_infosec_tools: true
+wireshark_as_nonsudo: true
+apt_security_tools:
+  # - name: nmap=7.91+dfsg1+really7.80+dfsg1-2build1 
+  #   state: present # present/absent/latest, default: present
+  - name: nmap
+    state: present # present/absent/latest, default: present
+  - name: wireshark
+    state: present # present/absent/latest, default: present
+
+

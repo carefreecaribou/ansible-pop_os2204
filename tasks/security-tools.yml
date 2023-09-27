@@ -1,0 +1,36 @@
+---
+- name: Wireshark Debconf Configuration
+  # Before installing any package, this only sets the preference for the question
+  debconf:
+    name='wireshark-common'
+    question='wireshark-common/install-setuid'
+    vtype='boolean'
+    value={{wireshark_as_nonsudo | string }}
+  become: true
+  notify: set_fact_for_user_group
+
+
+- name: Add user to wireshark group.
+  assert: { wireshark_as_nonsudo: true }
+  changed_when: true
+  when: user_group_changed == true
+  notify: add_wireshark_as_nonsudo
+
+- name: Remove user to wireshark group.
+  assert: { wireshark_as_nonsudo: false}
+  changed_when: true
+  when: user_group_changed == true
+  notify: remove_wireshark_as_nonsudo
+
+- name: Update global packages and upgrade
+  apt:
+    update_cache: true
+    upgrade: "yes"
+  become: true
+
+- name: Install Security packages with apt.
+  apt:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ apt_security_tools }}"
+  become: true

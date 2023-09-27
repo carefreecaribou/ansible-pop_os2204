@@ -1,0 +1,6 @@
+---
+# Remove the config.yml
+- name: Remove the config.yml
+  file:
+    path: "~/Development/ansible-pop_os2204/config.yml"
+    state: absent
