@@ -22,6 +22,18 @@
     state: "{{ item.state | default('present') }}"
   loop: "{{ customization_packages }}"
   become: true
+  
+# Required to modify dconf variables
+- name: Install psutil python package.
+  pip:
+    name: psutil
+
+# Disable Middle Click Paste
+- name: Disable middle click paste.
+  dconf:
+    key: "/org.gnome.desktop.interface"
+    value: "['gtk-enable-primary-paste', '{{ enable_middle_click_paste }}']"
+    state: present
 
 # Start TLP
 - name: Start TLP
@@ -37,4 +49,15 @@
     path: /etc/tlp.conf
     regexp: ^#?(DEVICES_TO_DISABLE_ON_STARTUP=")bluetooth nfc wifi wwan".*$
     replace: \1{{ devices_to_disable }}"
+  become: true
+
+# Make Caffeine Indicator Start on boot
+- name: Ensure caffeine is set to autostart.
+  copy: 
+    src: caffeine.desktop
+    dest: /etc/xdg/autostart/caffeine.desktop
+    owner: root
+    group: root
+    mode: '0644'
+    force: no
   become: true
