@@ -7,20 +7,10 @@
     vtype='boolean'
     value={{wireshark_as_nonsudo | string }}
   become: true
-  notify: set_fact_for_user_group
+  notify: "{{ (wireshark_as_nonsudo) | ternary ('add_wireshark_as_nonsudo', 'remove_wireshark_as_nonsudo')}}"
 
-
-- name: Add user to wireshark group.
-  assert: { wireshark_as_nonsudo: true }
-  changed_when: true
-  when: user_group_changed == true
-  notify: add_wireshark_as_nonsudo
-
-- name: Remove user to wireshark group.
-  assert: { wireshark_as_nonsudo: false}
-  changed_when: true
-  when: user_group_changed == true
-  notify: remove_wireshark_as_nonsudo
+- name: Flush handlers to handle wireshark configuration.
+  meta: flush_handlers
 
 - name: Update global packages and upgrade
   apt:

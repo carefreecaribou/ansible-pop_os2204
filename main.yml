@@ -15,9 +15,9 @@
   # Roles:
   #   - role: role_here
 
-  # handlers:
-  #   - name: wireshark_as_nonsudo
-  #     include: handlers/wireshark-as-nonsudo.yml
+  handlers:
+    - name: wireshark_as_nonsudo
+      include: handlers/wireshark-as-nonsudo.yml
 
   tasks:
     - import_tasks: tasks/remove-autoprovision-autostart.yml
@@ -35,10 +35,6 @@
     - import_tasks: tasks/security-tools.yml
       when: configure_infosec_tools
       tags: ['infosec-tools']
-    
-    - import_tasks: tasks/remove-config.yml
-      when: remove_config
-      tags: ['remove_config']    
 
     # - block:
     #     - name: Run configured post-provision ansible task files.
