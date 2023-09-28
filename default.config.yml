@@ -61,6 +61,8 @@ wireshark_as_nonsudo: true
 user_groups:
   - libvirt
   - kvm
+burpsuite_pro_state: present
+burpsuite_pro_url: "https://portswigger-cdn.net/burp/releases/download?product=pro&type=Linux"
 apt_security_tools:
   - name: nmap
     state: present # present/absent/latest, default: present

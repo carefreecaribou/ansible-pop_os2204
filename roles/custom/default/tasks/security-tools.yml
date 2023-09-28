@@ -24,3 +24,22 @@
     state: "{{ item.state | default('present') }}"
   loop: "{{ apt_security_tools }}"
   become: true
+
+- name: Check if Burpsuite is installed.
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/BurpSuitePro/BurpsuitePro"
+  register: is_burpsuite_installed
+
+# Install Burpsuite Pro
+- name: Install Burpsuite Pro.
+  ansible.builtin.apt:
+    deb: "{{ burpsuite_pro_url }}"
+    state: "{{ burpsuite_pro_state }}"
+  when: is_burpsuite_installed.stat.exists == false and burpsuite_pro_state == 'present'
+
+# Remove Burpsuite Pro If Installed
+- name: Uninstall Burpsuite if it exists
+  ansible.builtin.file:
+    state: burpsuite_pro_state
+    path: "{{ ansible_env.HOME }}/BurpSuitePro/"
+  when: is_burpsuite_installed.stat.exists == true and burpsuite_pro_state == 'absent'
