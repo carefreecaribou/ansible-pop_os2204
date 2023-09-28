@@ -66,7 +66,7 @@ user_groups:
   - kvm
 burpsuite_user: "{{ ansible_user_id }}"
 burpsuite_edition: pro
-burpsuite_pro_liense_key: <LICENSE_KEY_STRING>
+burpsuite_pro_liense_key: test
 apt_security_tools:
   - name: nmap
     state: present # present/absent/latest, default: present
