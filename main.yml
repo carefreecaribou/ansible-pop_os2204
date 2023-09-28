@@ -16,4 +16,5 @@
     - role: custom/default
     - role: PeterMosmans.virtualbox-guest
       become: true
-    # - role: gotmax23.zoom
+    - role: Gotmax23.zoom
+      become: true
