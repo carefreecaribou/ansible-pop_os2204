@@ -94,13 +94,23 @@
     replace: \1{{ devices_to_disable }}"
   become: true
 
-# Make Caffeine Indicator Start on boot
-- name: Ensure caffeine-indicator is set to autostart.
+# Add Autostart Desktop Entries
+- name: Add Autostart Desktop Entries.
   copy: 
-    src: caffeine-indicator.desktop
-    dest: /etc/xdg/autostart/caffeine-indicator.desktop
+    src: "{{ item.name }}.desktop"
+    dest: "/etc/xdg/autostart/{{ item.name }}.desktop"
     owner: root
     group: root
     mode: '0644'
     force: no
   become: true
+  when: item.state == 'present'
+  loop: "{{ autostart_applications }} "
+
+# Remove Unwanted Autostart Applications
+- name: Remove Unwanted Autostart Applications.
+  file:
+    path: "/etc/xdg/autostart/{{ item.name }}.desktop"
+  become: true
+  when: item.state == 'absent'
+  loop: "{{ autostart_applications }} "

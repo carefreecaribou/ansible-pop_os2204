@@ -50,7 +50,11 @@ flatpak_packages: # Flatpak Packages to Install
   - name: md.obsidian.Obsidian
   - name: org.flameshot.Flameshot
   - name: org.signal.Signal
-caffeine_on_boot: true
+autostart_applications:
+  - name: flameshot
+    state: present
+  - name: caffeine-indicator
+    state: present
 enable_middle_click_paste: false
 configure_infosec_tools: true
 wireshark_as_nonsudo: true
@@ -62,5 +66,6 @@ apt_security_tools:
     state: present # present/absent/latest, default: present
   - name: wireshark
     state: present
+
 
 
