@@ -2,7 +2,7 @@
 Icon=flameshot
 Name=Flameshot
 Comment=Screenshot Utility
-Exec=/usr/bin/flameshot
+Exec=flatpak run com.flameshot.Flameshot
 Terminal=false
 Type=Application
 Categories=Utility;
