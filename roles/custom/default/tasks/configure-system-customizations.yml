@@ -59,7 +59,8 @@
 # Required to modify dconf variables
 - name: Install psutil python package.
   pip:
-    name: psutil
+    - name: psutil
+    - name: jmespath
 
 # Add User to Groups
 - name: Add current user to defined groups.
