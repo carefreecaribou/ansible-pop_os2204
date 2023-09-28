@@ -15,6 +15,32 @@
     replace: \1{{ banner_message }}'
   become: true
 
+# Install VSCodium APT Key
+- name: Install vscodium APT Key
+  get_url:
+    url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    dest: /usr/share/keyrings/vscodium-archive-keyring.asc
+    mode: '0644' 
+  when: codium_state == 'present'
+  become: true
+
+- name: Remove VScodium APT Key
+  file:
+    path: "/usr/share/keyrings/vscodium-archive-keyring.asc"
+    state: absent
+  when: codium_state == 'absent'
+  become: true
+
+
+# Install VSCodium APT Repository
+- name: Install VSCodium APT Repository
+  apt_repository:
+    filename: vscodium
+    repo: "deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://download.vscodium.com/debs vscodium main"
+    state: "{{ codium_state }}"
+    update_cache: true
+  become: true
+
 # Install Customization Packages
 - name: Install Customization packages with apt.
   apt:
@@ -36,6 +62,15 @@
   pip:
     name: psutil
 
+# Add User to Groups
+- name: Add current user to defined groups.
+  user:
+    name: "{{ ansible_user_id }}"
+    append: true
+    groups: "{{ item }}"
+  become: true
+  loop: "{{ user_groups }}"
+  
 # Disable Middle Click Paste
 - name: Disable middle click paste.
   dconf:

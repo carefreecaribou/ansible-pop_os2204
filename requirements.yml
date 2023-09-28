@@ -1,4 +1,7 @@
 ---
-# roles:
+roles:
+  - src: https://github.com/PeterMosmans/ansible-role-virtualbox-guest
+    scm: git
+    name: PeterMosmans.virtualbox-guest
 collections:
   - name: community.docker

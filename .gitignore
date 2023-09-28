@@ -1,7 +1,8 @@
 *.vagrant
 .DS_Store
 *.retry
-roles*
+roles/*
+!roles/custom
 config.yml
 Vagrantfile
 test.sh
