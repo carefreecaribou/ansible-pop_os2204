@@ -18,3 +18,5 @@
       become: true
     - role: Gotmax23.zoom
       become: true
+    - role: Iesplin.Burpsuite
+      become: true
