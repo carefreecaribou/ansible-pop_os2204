@@ -38,7 +38,6 @@
     filename: vscodium
     repo: "deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://download.vscodium.com/debs vscodium main"
     state: "{{ codium_state }}"
-    update_cache: true
   become: true
 
 # Install Customization Packages
