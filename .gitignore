@@ -3,6 +3,7 @@
 *.retry
 roles/*
 !roles/custom
+collections/*
 config.yml
 Vagrantfile
 test.sh

@@ -5,3 +5,4 @@ roles:
     name: PeterMosmans.virtualbox-guest
 collections:
   - name: community.docker
+  - name: community.general
