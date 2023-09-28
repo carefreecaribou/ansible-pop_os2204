@@ -7,8 +7,9 @@ On a newly installed image:
 - To overwrite the defaults, save a confiration file as ~/provision-config.yml. To download the current default config for overriding it:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/carefreecaribou/ansible-pop_os2204/main/roles/custom/vars/main.yml -o provision-config.yml
+curl -fsSL https://raw.githubusercontent.com/carefreecaribou/ansible-pop_os2204/main/default.config.yml -o provision-config.yml
 ```
+- Be sure to include your burpsuite pro license key in the `provision_config.yml` file.
 - If you autoprovision, the `remove_autostart` variable is appended to your config file to prevent running the autoprovision specific tasks.
 - Open a terminal, curl the `.autoprovision.sh` script and pipe to bash to autoprovision the system:
 ```bash
