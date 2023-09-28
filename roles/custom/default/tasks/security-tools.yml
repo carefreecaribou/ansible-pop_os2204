@@ -31,11 +31,23 @@
   register: is_burpsuite_installed
 
 # Install Burpsuite Pro
-- name: Install Burpsuite Pro.
-  ansible.builtin.apt:
-    deb: "{{ burpsuite_pro_url }}"
-    state: "{{ burpsuite_pro_state }}"
+- name: Download Burpsuite Pro Installation Script and Install.
   when: is_burpsuite_installed.stat.exists == false and burpsuite_pro_state == 'present'
+  block:
+  - name: Download burpsuite pro installation script.
+    ansible.builtin.get_url:
+      url: "{{ burpsuite_pro_url }}"
+      dest: "{{ ansible_env.HOME }}/Downloads/burp.sh"
+    register: getScript
+
+  - name: Install Burpsuite
+    ansible.builtin.shell: /usr/bin/bash {{ ansible_env.HOME }}/Downloads/burp.sh
+    when: getScript.failed  != true
+
+  - name: Remove Installation Script
+    ansible.builtin.file:
+      path: "{{ ansible_env.HOME }}/Downloads/burp.sh"
+      state: absent
 
 # Remove Burpsuite Pro If Installed
 - name: Uninstall Burpsuite if it exists
