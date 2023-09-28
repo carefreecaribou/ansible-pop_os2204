@@ -26,6 +26,7 @@ banner_message: 'Unauthorized Access Prohibited'
 devices_to_disable: 'bluetooth' # 'bluetooth nfc wifi wwan'
 codium_state: present
 virtualbox_version: auto
+zoom_state: present
 customization_packages: # Optional Packages to Install
   - name: codium
     state: "{{ codium_state }}" # present/absent/latest, default:  - Change to absent to remove package.
@@ -35,7 +36,6 @@ customization_packages: # Optional Packages to Install
   - name: libpcsclite-dev   # For Allowing use of Yubikey Signing
   - name: caffeine          # Keep the screen awake, If Absent, change `caffeine_on_boot` to `false`.
   - name: tlp
-  - name: zoom
   - name: discord
   - name: virt-manager
   - name: qemu-kvm
@@ -62,4 +62,5 @@ apt_security_tools:
     state: present # present/absent/latest, default: present
   - name: wireshark
     state: present
+
 

@@ -73,7 +73,7 @@
   
 # Disable Middle Click Paste
 - name: Disable middle click paste.
-  dconf:
+  community.general.dconf:
     key: "/org.gnome.desktop.interface"
     value: "['gtk-enable-primary-paste', '{{ enable_middle_click_paste }}']"
     state: present
