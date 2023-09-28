@@ -7,6 +7,10 @@ roles:
     version: check-zoom-installed
     scm: git
     name: Gotmax23.zoom
+  - src: https://github.com/carefreecaribou/ansible-role-burpsuite
+    scm: git
+    version: jrubyupdate
+    name: Iesplin.Burpsuite
 collections:
   - name: community.docker
   - name: community.general
