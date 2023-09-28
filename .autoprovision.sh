@@ -11,7 +11,7 @@ sudo apt update && sudo NEEDRESTART_MODE=a apt-get -y upgrade
 sudo apt install -y git
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py --user
-python3 -m pip install --user ansible
+python3 -m pip install --user ansible jinja2
 
 # Make Development Folder and Clone the Repo
 mkdir -p ~/Development/ansible-pop_os2204;
