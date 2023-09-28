@@ -15,13 +15,21 @@
     replace: \1{{ banner_message }}'
   become: true
 
-# Install Customization Package Requirements
+# Install Customization Packages
 - name: Install Customization packages with apt.
   apt:
     name: "{{ item.name | default(item) }}"
     state: "{{ item.state | default('present') }}"
   loop: "{{ customization_packages }}"
   become: true
+
+# Install Flatpack Packages
+- name: Install Customization packages with flatpak.
+  community.general.flatpak:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    method: "{{ item.method | default('user') }}"
+  loop: "{{ flatpak_packages }}"
   
 # Required to modify dconf variables
 - name: Install psutil python package.
