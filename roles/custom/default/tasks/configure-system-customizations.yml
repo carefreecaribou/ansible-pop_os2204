@@ -56,11 +56,11 @@
     method: "{{ item.method | default('user') }}"
   loop: "{{ flatpak_packages }}"
   
-# Required to modify dconf variables
-- name: Install psutil python package.
+# Install Python Packages.
+- name: Install python packages.
   pip:
-    - name: psutil
-    - name: jmespath
+    name: "{{ item }}"
+  loop: "{{ pip_packages }}"
 
 # Add User to Groups
 - name: Add current user to defined groups.

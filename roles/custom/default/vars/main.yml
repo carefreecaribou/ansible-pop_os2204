@@ -27,6 +27,9 @@ devices_to_disable: 'bluetooth' # 'bluetooth nfc wifi wwan'
 codium_state: present
 virtualbox_version: auto
 zoom_state: present
+pip_packages:
+  - psutil
+  - jmespath
 customization_packages: # Optional Packages to Install
   - name: codium
     state: "{{ codium_state }}" # present/absent/latest, default:  - Change to absent to remove package.
