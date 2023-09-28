@@ -21,7 +21,7 @@ cd ~/Development/ansible-pop_os2204
 
 # Run the Playbook
 ansible-galaxy install -r requirements.yml
-echo "remove_autostart: true" >> config.yml
+sed -i '/^remove_autostart:/{h;s/:.*/: true/};${x;/^$/{s//remove_autostart: true/;H};x}' config.yml
 echo 'gnome-terminal -- bash -c "cd ~/Development/ansible-pop_os2204 && ansible-playbook main.yml --ask-become-pass; bash"' >> ~/.profile
 sudo systemctl disable pop-upgrade.service
 sudo reboot now

@@ -3,14 +3,12 @@ downloads: ~/.ansible-downloads/
 profile_command: 'gnome-terminal -- bash -c "cd ~/Development/ansible-pop_os2204 && ansible-playbook main.yml --ask-become-pass; bash"'
 # Roles
 configure_docker: true
-
 # Tasks
 remove_autostart: false
 configure_sudoers: true
 sudoers_custom_config: |
   # Allow {{ ansible_user_id }} to use sudo with no password.
   {{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL
-
 dotfiles_repo: https://github.com/carefreecaribou/dotfiles.git
 dotfiles_repo_accept_hostkey: true
 dotfiles_repo_local_destination: ~/Development/GitHub/dotfiles
@@ -20,7 +18,6 @@ dotfiles_files:
   - .profile
   - .vimrc
   - .gitconfig
-
 configure_system_customizations: true # This should always be true to setup the system correctly.
 banner_message: 'Unauthorized Access Prohibited'
 devices_to_disable: 'bluetooth' # 'bluetooth nfc wifi wwan'
@@ -47,7 +44,7 @@ customization_packages: # Optional Packages to Install
   - name: bridge-utils
   - name: virtualbox
 flatpak_packages: # Flatpak Packages to Install
-  - name: com.mattermost.Desktop 
+  - name: com.mattermost.Desktop
     state: present          # present/absent/latest, default:  - Change to absent to remove package.
   - name: com.spotify.Client
   - name: md.obsidian.Obsidian
@@ -66,12 +63,9 @@ user_groups:
   - kvm
 burpsuite_user: "{{ ansible_user_id }}"
 burpsuite_edition: pro
-burpsuite_pro_liense_key: test
+burpsuite_pro_liense_key: <key>
 apt_security_tools:
   - name: nmap
     state: present # present/absent/latest, default: present
   - name: wireshark
     state: present
-
-
-
